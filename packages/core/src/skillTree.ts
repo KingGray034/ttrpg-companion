@@ -20,7 +20,7 @@ export type NodeVisual = {
   shape: NodeShape;
 };
 
-// ---- Step 1: count tags across owned nodes ----
+// Count tags across owned nodes ----
 
 export function countTags(nodes: TaggedNode[]): Record<string, number> {
   const counts: Record<string, number> = {};
@@ -32,7 +32,7 @@ export function countTags(nodes: TaggedNode[]): Record<string, number> {
   return counts;
 }
 
-// ---- Step 2: which archetypes are active ----
+// Which archetypes are active ----
 
 export function detectActiveArchetypes(
   tagCounts: Record<string, number>,
@@ -43,7 +43,7 @@ export function detectActiveArchetypes(
     .map(([tag]) => tag);
 }
 
-// ---- Step 3: color + shape for a single node ----
+// Color + shape for a single node ----
 
 function nodeOpposesActiveArchetype(
   node: TaggedNode,

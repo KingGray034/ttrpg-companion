@@ -43,6 +43,12 @@ describe("colorForNode", () => {
     const result = colorForNode(node, ["magic"], oppositionRules);
     expect(result).toEqual({ nodeId: "n3", color: "blue", shape: "diamond" });
   });
+
+  it("colors a node white if it has no tags", () => {
+    const node = { id: "n4", tags: []};
+    const result = colorForNode(node, ["magic"], oppositionRules);
+    expect(result).toEqual({ nodeId: "n4", color: "white", shape: "square" });
+  })
 });
 
 describe("computeSkillTree", () => {
