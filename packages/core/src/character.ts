@@ -1,10 +1,5 @@
-import {
-  TaggedNode,
-  ArchetypeThresholds,
-  OppositionRules,
-  NodeVisual,
-  computeSkillTree,
-} from "./skillTree.ts";
+import type { TaggedNode, ArchetypeThresholds, OppositionRules, NodeVisual } from "./skillTree";
+import { computeSkillTree } from "./skillTree";
 
 export class Character {
   readonly id: string;

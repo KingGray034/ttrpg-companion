@@ -2,7 +2,11 @@
 
 export type TaggedNode = {
   id: string;
+  name: string;
+  description: string;
   tags: string[];
+  prerequisites: string[];
+  cost: number;
 };
 
 export type ArchetypeThresholds = Record<string, number>;
@@ -11,7 +15,6 @@ export type OppositionRules = Record<string, string[]>;
 
 export type NodeColor = "green" | "red" | "blue" | "white" | "gold" | "purple";
 
-// Accessibility: every color pairs with a distinct shape, never color alone.
 export type NodeShape = "circle" | "triangle" | "square" | "diamond" | "star" | "hexagon";
 
 export type NodeVisual = {
@@ -20,7 +23,7 @@ export type NodeVisual = {
   shape: NodeShape;
 };
 
-// Count tags across owned nodes ----
+// ---- Pipeline ----
 
 export function countTags(nodes: TaggedNode[]): Record<string, number> {
   const counts: Record<string, number> = {};
@@ -32,8 +35,6 @@ export function countTags(nodes: TaggedNode[]): Record<string, number> {
   return counts;
 }
 
-// Which archetypes are active ----
-
 export function detectActiveArchetypes(
   tagCounts: Record<string, number>,
   thresholds: ArchetypeThresholds
@@ -42,8 +43,6 @@ export function detectActiveArchetypes(
     .filter(([tag, threshold]) => (tagCounts[tag] ?? 0) >= threshold)
     .map(([tag]) => tag);
 }
-
-// Color + shape for a single node ----
 
 function nodeOpposesActiveArchetype(
   node: TaggedNode,
@@ -76,8 +75,6 @@ export function colorForNode(
   }
   return { nodeId: node.id, color: "blue", shape: "diamond" };
 }
-
-// ---- Orchestration: run the whole pipeline for a character ----
 
 export function computeSkillTree(
   ownedNodes: TaggedNode[],
